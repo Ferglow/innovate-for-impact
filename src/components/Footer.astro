@@ -1,0 +1,107 @@
+---
+const socialLinks = [
+	{ href: 'https://www.instagram.com/innovate_for_impact/', label: 'Instagram' },
+	{ href: 'https://www.youtube.com/@GreenMyExperience', label: 'YouTube' },
+	{ href: 'https://www.linkedin.com/company/overview-effect/', label: 'LinkedIn' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="container footer-grid">
+		<div class="brand">
+			<h3>Innovate for Impact</h3>
+			<p>
+				Iniciativa global que une a líderes, empresas y changemakers donde la innovación se
+				encuentra con la sostenibilidad.
+			</p>
+		</div>
+
+		<nav aria-label="Redes sociales">
+			<h4>Conecta</h4>
+			<ul>
+				{
+					socialLinks.map((link) => (
+						<li>
+							<a href={link.href} target="_blank" rel="noopener noreferrer">
+								{link.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+
+	<div class="container legal">
+		<p>© {year} Innovate for Impact. Todos los derechos reservados.</p>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		background-color: var(--color-forest);
+		color: var(--color-cream);
+		padding-block: 4rem 2rem;
+		margin-top: 6rem;
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		gap: 3rem;
+		padding-bottom: 3rem;
+		border-bottom: 1px solid color-mix(in srgb, var(--color-cream) 20%, transparent);
+	}
+
+	.brand h3 {
+		font-size: 1.4rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.brand p {
+		max-width: 42ch;
+		opacity: 0.75;
+		font-size: 0.95rem;
+	}
+
+	h4 {
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin-bottom: 1rem;
+		opacity: 0.7;
+	}
+
+	ul {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	ul a {
+		font-size: 0.95rem;
+		opacity: 0.85;
+		transition: opacity 0.2s ease;
+	}
+
+	ul a:hover {
+		opacity: 1;
+		text-decoration: underline;
+	}
+
+	.legal {
+		padding-top: 2rem;
+		font-size: 0.85rem;
+		opacity: 0.6;
+	}
+
+	@media (max-width: 640px) {
+		.footer-grid {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+	}
+</style>

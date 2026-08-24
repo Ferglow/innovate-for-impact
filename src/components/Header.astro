@@ -1,0 +1,92 @@
+---
+const navLinks = [
+	{ href: '#eventos', label: 'Eventos' },
+	{ href: '#comunidad', label: 'Comunidad' },
+	{ href: '#experiencias', label: 'Experiencias' },
+];
+---
+
+<header class="site-header">
+	<div class="container header-inner">
+		<a href="/" class="logo" aria-label="Innovate for Impact - inicio">
+			<svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+				<circle cx="17" cy="17" r="15" stroke="currentColor" stroke-width="2.5" />
+				<path d="M17 6c-4 4-4 18 0 22M17 6c4 4 4 18 0 22M4 17h26" stroke="currentColor" stroke-width="1.5" />
+			</svg>
+			<span>IFI</span>
+		</a>
+
+		<nav aria-label="Principal">
+			{navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+		</nav>
+
+		<a href="#registro" class="cta">Únete</a>
+	</div>
+</header>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		background-color: color-mix(in srgb, var(--color-cream) 85%, transparent);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+	}
+
+	.header-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 2rem;
+		padding-block: 1rem;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-family: var(--font-display);
+		font-size: 1.35rem;
+		font-weight: 700;
+		color: var(--color-forest);
+	}
+
+	nav {
+		display: flex;
+		gap: 2rem;
+	}
+
+	nav a {
+		font-size: 0.95rem;
+		font-weight: 500;
+		color: var(--color-ink);
+		opacity: 0.75;
+		transition: opacity 0.2s ease;
+	}
+
+	nav a:hover {
+		opacity: 1;
+	}
+
+	.cta {
+		background-color: var(--color-forest);
+		color: var(--color-lime);
+		padding: 0.6rem 1.4rem;
+		border-radius: 999px;
+		font-size: 0.95rem;
+		font-weight: 600;
+		transition: transform 0.2s ease, background-color 0.2s ease;
+	}
+
+	.cta:hover {
+		transform: translateY(-2px);
+		background-color: var(--color-moss);
+	}
+
+	@media (max-width: 640px) {
+		nav {
+			display: none;
+		}
+	}
+</style>

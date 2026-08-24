@@ -1,0 +1,92 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = 'Iniciativa global donde la innovacion se encuentra con el impacto.' } =
+	Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--color-forest: #12332b;
+		--color-moss: #2d5a4a;
+		--color-lime: #c8f169;
+		--color-cream: #f6f3ec;
+		--color-ink: #1c2420;
+		--font-display: 'Fraunces', Georgia, serif;
+		--font-body: 'Inter', system-ui, sans-serif;
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		font-family: var(--font-body);
+		color: var(--color-ink);
+		background-color: var(--color-cream);
+		line-height: 1.6;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	img {
+		max-width: 100%;
+		display: block;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	h1,
+	h2,
+	h3 {
+		font-family: var(--font-display);
+		line-height: 1.1;
+		font-weight: 600;
+	}
+
+	.container {
+		width: min(1120px, 92%);
+		margin-inline: auto;
+	}
+</style>
