@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import EventCard from '../components/EventCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
 
 const stats = [
 	{ value: '2,200+', label: 'registros' },
@@ -21,6 +24,71 @@ const attendees = [
 	'Sephora',
 	'JetBlue',
 ];
+
+const upcomingEvents = [
+	{
+		city: 'New York',
+		country: 'US · Septiembre 2025',
+		date: 'Climate Week NYC',
+		status: 'next' as const,
+		href: '#',
+		stats: [
+			{ value: '25', label: 'speakers' },
+			{ value: '05', label: 'paneles' },
+			{ value: '01', label: 'soundbath' },
+		],
+	},
+	{
+		city: 'Mexico City',
+		country: 'MX · Octubre 2025',
+		date: 'Por anunciar',
+		status: 'soon' as const,
+	},
+];
+
+const pastEvents = [
+	{
+		city: 'Singapore',
+		country: 'SG · Mayo 2025',
+		date: 'A concert with purpose',
+		status: 'past' as const,
+		href: '#',
+	},
+	{
+		city: 'New York',
+		country: 'US · Septiembre 2024',
+		date: 'Innovate for Impact NYC',
+		status: 'past' as const,
+		href: '#',
+	},
+];
+
+const experiences = [
+	{
+		title: 'Conciertos con propósito',
+		description: 'Música en vivo que conecta mentes y corazones con la causa.',
+		variant: 'concert',
+	},
+	{
+		title: 'Sound bath inmersivo',
+		description: 'Experiencias sensoriales para integrar las ideas del escenario.',
+		variant: 'soundbath',
+	},
+	{
+		title: 'Conexiones estratégicas',
+		description: 'Espacios de networking donde nacen alianzas reales.',
+		variant: 'networking',
+	},
+];
+
+const sponsors = ['Asuaire', 'Algoryt', 'Connecto', 'T+C', 'Overview Effect'];
+
+const testimonial = {
+	quote:
+		'Attending the NYC Climate Week event was a transformative experience. The blend of powerful talks, innovative ideas, and the incredible concert created a unique atmosphere. The tree planting initiative was the perfect touch—it made me feel like I was truly contributing to something meaningful.',
+	author: 'Yantar Baruca',
+	role: 'Sustainability Enthusiast',
+};
 ---
 
 <BaseLayout title="Innovate for Impact | Donde la innovación se encuentra con el impacto">
@@ -62,6 +130,83 @@ const attendees = [
 					))
 				}
 			</div>
+		</div>
+	</section>
+
+	<section id="nosotros" class="about">
+		<div class="container">
+			<SectionHeader
+				eyebrow="¿Qué es IFI?"
+				title="Una plataforma global donde la sostenibilidad inspira acción real"
+			/>
+			<p class="about-text">
+				Lanzada durante la <strong>Climate Week en Nueva York</strong> y expandida a Singapur,
+				IFI une a líderes, empresas y changemakers a través de conversaciones significativas. En
+				solo tres ediciones ha consolidado un espacio donde la innovación impulsa el cambio, con
+				un enfoque local para los desafíos globales de cada ciudad anfitriona.
+			</p>
+		</div>
+	</section>
+
+	<section id="eventos" class="events">
+		<div class="container">
+			<SectionHeader eyebrow="Agenda 2025" title="Próximos eventos insignia" />
+			<div class="card-grid">
+				{upcomingEvents.map((event) => <EventCard {...event} />)}
+			</div>
+		</div>
+	</section>
+
+	<section id="experiencias" class="experiences">
+		<div class="container">
+			<SectionHeader
+				eyebrow="Beyond talks"
+				title="Ideas, música y experiencias inolvidables"
+				description="Nuestros eventos combinan charlas inspiradoras con conciertos únicos, donde innovación, naturaleza y música se encuentran."
+			/>
+			<div class="experience-grid">
+				{
+					experiences.map((exp) => (
+						<figure class:list={['tile', exp.variant]}>
+							<div class="art" />
+							<figcaption>
+								<h3>{exp.title}</h3>
+								<p>{exp.description}</p>
+							</figcaption>
+						</figure>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section id="comunidad" class="community">
+		<div class="container">
+			<SectionHeader
+				eyebrow="Comunidad"
+				title="Eventos pasados"
+				description="De cenas exclusivas a actividades colaborativas: cada edición deja una comunidad más fuerte de personas impulsando el cambio."
+			/>
+			<div class="card-grid two">
+				{pastEvents.map((event) => <EventCard {...event} />)}
+			</div>
+		</div>
+	</section>
+
+	<section class="testimonials">
+		<div class="container">
+			<TestimonialCard {...testimonial} />
+		</div>
+	</section>
+
+	<section id="sponsors" class="sponsors">
+		<div class="container">
+			<SectionHeader eyebrow="Aliados" title="Algunos de nuestros patrocinadores" />
+			<ul class="sponsor-list">
+				{sponsors.map((name) => (
+					<li>{name}</li>
+				))}
+			</ul>
 		</div>
 	</section>
 </BaseLayout>
@@ -217,6 +362,123 @@ const attendees = [
 		color: var(--color-forest);
 	}
 
+	.about {
+		padding-block: 6rem 0;
+	}
+
+	.about-text {
+		max-width: 62ch;
+		margin-inline: auto;
+		text-align: center;
+		font-size: clamp(1rem, 2vw, 1.15rem);
+		opacity: 0.85;
+	}
+
+	.events,
+	.experiences,
+	.community,
+	.testimonials,
+	.sponsors {
+		padding-top: 6rem;
+	}
+
+	.card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
+		max-width: 62rem;
+		margin-inline: auto;
+	}
+
+	.card-grid.two {
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		max-width: 52rem;
+	}
+
+	.experience-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.tile {
+		border-radius: 1.5rem;
+		overflow: hidden;
+		background-color: #fff;
+		box-shadow: 0 10px 30px color-mix(in srgb, var(--color-ink) 8%, transparent);
+		transition: transform 0.25s ease;
+	}
+
+	.tile:hover {
+		transform: translateY(-4px);
+	}
+
+	.art {
+		height: 220px;
+	}
+
+	.concert .art {
+		background:
+			radial-gradient(120% 120% at 20% 20%, #c8f169 0%, transparent 55%),
+			linear-gradient(135deg, #12332b 0%, #2d5a4a 100%);
+	}
+
+	.soundbath .art {
+		background:
+			radial-gradient(circle at 70% 30%, #f6f3ec33 0%, transparent 45%),
+			repeating-radial-gradient(circle at 50% 50%, #12332b 0px, #2d5a4a 8px, #12332b 16px);
+	}
+
+	.networking .art {
+		background:
+			radial-gradient(100% 100% at 80% 90%, #c8f16944 0%, transparent 60%),
+			linear-gradient(315deg, #1c2420 0%, #2d5a4a 100%);
+	}
+
+	figcaption {
+		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	figcaption h3 {
+		font-size: 1.25rem;
+		color: var(--color-forest);
+	}
+
+	figcaption p {
+		font-size: 0.95rem;
+		opacity: 0.75;
+	}
+
+	.sponsor-list {
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+		max-width: 46rem;
+		margin-inline: auto;
+	}
+
+	.sponsor-list li {
+		font-family: var(--font-display);
+		font-weight: 600;
+		font-size: 1.05rem;
+		color: var(--color-moss);
+		border: 1px solid color-mix(in srgb, var(--color-moss) 30%, transparent);
+		border-radius: 999px;
+		padding: 0.6rem 1.6rem;
+		transition: background-color 0.2s ease, color 0.2s ease;
+	}
+
+	.sponsor-list li:hover {
+		background-color: var(--color-forest);
+		color: var(--color-lime);
+		border-color: var(--color-forest);
+	}
+
 	@media (max-width: 720px) {
 		.hero {
 			padding-block: 4.5rem 3.5rem;
@@ -224,6 +486,14 @@ const attendees = [
 
 		.stats {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.events,
+		.experiences,
+		.community,
+		.testimonials,
+		.sponsors {
+			padding-top: 4.5rem;
 		}
 	}
 </style>

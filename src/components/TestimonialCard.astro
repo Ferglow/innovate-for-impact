@@ -1,0 +1,62 @@
+---
+interface Props {
+	quote: string;
+	author: string;
+	role: string;
+}
+
+const { quote, author, role } = Astro.props;
+---
+
+<figure class="testimonial">
+	<span class="mark" aria-hidden="true">“</span>
+	<blockquote>{quote}</blockquote>
+	<figcaption>
+		<strong>{author}</strong>
+		<span>{role}</span>
+	</figcaption>
+</figure>
+
+<style>
+	.testimonial {
+		position: relative;
+		max-width: 46rem;
+		margin-inline: auto;
+		text-align: center;
+		padding: 3rem 1rem 0;
+	}
+
+	.mark {
+		font-family: var(--font-display);
+		font-size: 6rem;
+		line-height: 1;
+		color: var(--color-lime);
+		display: block;
+		margin-bottom: -2.5rem;
+	}
+
+	blockquote {
+		font-family: var(--font-display);
+		font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+		font-style: italic;
+		color: var(--color-forest);
+	}
+
+	figcaption {
+		margin-top: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	strong {
+		color: var(--color-ink);
+	}
+
+	figcaption span {
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		opacity: 0.6;
+	}
+</style>

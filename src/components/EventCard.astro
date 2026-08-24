@@ -1,0 +1,155 @@
+---
+interface EventStat {
+	value: string;
+	label: string;
+}
+
+interface Props {
+	city: string;
+	country: string;
+	date: string;
+	status: 'next' | 'soon' | 'past';
+	href?: string;
+	stats?: EventStat[];
+}
+
+const { city, country, date, status, href, stats = [] } = Astro.props;
+
+const badges: Record<Props['status'], string> = {
+	next: 'Más reciente',
+	soon: 'Coming soon',
+	past: 'Evento pasado',
+};
+
+const linkLabel = status === 'past' ? 'Ver highlights' : 'Más info';
+---
+
+<article class:list={['card', status]}>
+	<div class="top">
+		<span class="badge">{badges[status]}</span>
+		<time>{date}</time>
+	</div>
+
+	<h3>{city}</h3>
+	<p class="country">{country}</p>
+
+	{
+		stats.length > 0 && (
+			<dl class="stats">
+				{stats.map((stat) => (
+					<div>
+						<dt>{stat.value}</dt>
+						<dd>{stat.label}</dd>
+					</div>
+				))}
+			</dl>
+		)
+	}
+
+	{
+		status !== 'soon' && href && (
+			<a class="link" href={href}>
+				{linkLabel}
+				<span aria-hidden="true">→</span>
+			</a>
+		)
+	}
+</article>
+
+<style>
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		background-color: var(--color-forest);
+		color: var(--color-cream);
+		border-radius: 1.5rem;
+		padding: 2rem;
+		border: 1px solid transparent;
+		transition:
+			transform 0.25s ease,
+			border-color 0.25s ease;
+	}
+
+	.card:hover {
+		transform: translateY(-4px);
+		border-color: var(--color-lime);
+	}
+
+	.top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+
+	.badge {
+		font-size: 0.72rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--color-forest);
+		background-color: var(--color-lime);
+		border-radius: 999px;
+		padding: 0.3rem 0.8rem;
+	}
+
+	time {
+		font-size: 0.85rem;
+		opacity: 0.7;
+	}
+
+	h3 {
+		font-size: clamp(1.6rem, 3vw, 2.1rem);
+		margin-top: 0.5rem;
+	}
+
+	.country {
+		font-size: 0.95rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		opacity: 0.65;
+		margin-bottom: auto;
+	}
+
+	.stats {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.75rem;
+		padding-top: 1.25rem;
+		margin-top: 0.75rem;
+		border-top: 1px solid color-mix(in srgb, var(--color-cream) 18%, transparent);
+	}
+
+	.stats dt {
+		font-family: var(--font-display);
+		font-size: 1.6rem;
+		font-weight: 700;
+		color: var(--color-lime);
+		line-height: 1.2;
+	}
+
+	.stats dd {
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		opacity: 0.7;
+	}
+
+	.link {
+		margin-top: 1.25rem;
+		font-weight: 600;
+		color: var(--color-lime);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.link span {
+		transition: transform 0.2s ease;
+	}
+
+	.link:hover span {
+		transform: translateX(4px);
+	}
+</style>
