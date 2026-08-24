@@ -21,4 +21,13 @@ const eventos = defineCollection({
 	}),
 });
 
-export const collections = { eventos };
+const testimonios = defineCollection({
+	loader: glob({ pattern: '**/*.md', base: './src/content/testimonios' }),
+	schema: z.object({
+		author: z.string(),
+		role: z.string(),
+		quote: z.string(),
+	}),
+});
+
+export const collections = { eventos, testimonios };

@@ -9,6 +9,7 @@ const events = await getCollection('eventos');
 const sorted = [...events].sort((a, b) => a.data.order - b.data.order);
 const upcoming = sorted.filter((e) => e.data.status !== 'past');
 const past = sorted.filter((e) => e.data.status === 'past');
+const testimonials = await getCollection('testimonios');
 
 const stats = [
 	{ value: '2,200+', label: 'registros' },
@@ -50,13 +51,6 @@ const experiences = [
 ];
 
 const sponsors = ['Asuaire', 'Algoryt', 'Connecto', 'T+C', 'Overview Effect'];
-
-const testimonial = {
-	quote:
-		'Attending the NYC Climate Week event was a transformative experience. The blend of powerful talks, innovative ideas, and the incredible concert created a unique atmosphere. The tree planting initiative was the perfect touch—it made me feel like I was truly contributing to something meaningful.',
-	author: 'Yantar Baruca',
-	role: 'Sustainability Enthusiast',
-};
 ---
 
 <BaseLayout title="Innovate for Impact | Donde la innovación se encuentra con el impacto">
@@ -168,10 +162,10 @@ const testimonial = {
 	</section>
 
 	<section class="testimonials">
-		<div class="container">
-			<TestimonialCard {...testimonial} />
-		</div>
-	</section>
+			<div class="container">
+				{testimonials.map((entry) => <TestimonialCard {...entry.data} />)}
+			</div>
+		</section>
 
 	<section id="sponsors" class="sponsors">
 		<div class="container">

@@ -1,14 +1,14 @@
 ---
 city: Mexico City
 country: México
-date: Octubre 2025
+date: Octubre 2026
 status: soon
 order: 2
 ---
 
 ## Próxima parada: Ciudad de México
 
-Innovate for Impact llega a Latinoamérica. En octubre de 2025, la Ciudad de México recibirá la quinta edición de la iniciativa, adaptando la conversación global sobre sostenibilidad al contexto cultural y ambiental mexicano.
+Innovate for Impact llega a Latinoamérica. En octubre de 2026, la Ciudad de México recibirá la quinta edición de la iniciativa, adaptando la conversación global sobre sostenibilidad al contexto cultural y ambiental mexicano.
 
 Como en cada edición, el programa combinará paneles con líderes regionales, experiencias inmersivas y espacios de conexión estratégica.
 

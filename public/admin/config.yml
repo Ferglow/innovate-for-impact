@@ -1,0 +1,91 @@
+backend:
+  name: github
+  repo: Ferglow/innovate-for-impact
+  branch: main
+
+local_backend: true
+
+locale: es
+
+site_url: https://innovate-for-impact.example
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: eventos
+    label: Eventos
+    label_singular: Evento
+    folder: src/content/eventos
+    create: true
+    extension: md
+    identifier_field: city
+    slug: '{{fields.city}}-{{year}}'
+    sortable_fields: [city, date, status]
+    summary: '{{city}} · {{date}} — {{status}}'
+    editor:
+      preview: false
+    fields:
+      - label: Ciudad
+        name: city
+        widget: string
+      - label: País
+        name: country
+        widget: string
+      - label: Fecha visible
+        name: date
+        widget: string
+        hint: Texto que se muestra, ej. "Septiembre 2025"
+      - label: Bajada (kicker)
+        name: kicker
+        widget: string
+        required: false
+      - label: Estado
+        name: status
+        widget: select
+        options: [next, soon, past]
+        default: soon
+      - label: Orden
+        name: order
+        widget: number
+        default: 99
+        hint: Menor número aparece primero en cada grupo
+      - label: Estadísticas
+        name: stats
+        widget: list
+        required: false
+        fields:
+          - label: Valor
+            name: value
+            widget: string
+            hint: ej. "25" o "2,200+"
+          - label: Etiqueta
+            name: label
+            widget: string
+            hint: ej. "speakers"
+      - label: Contenido de la página
+        name: body
+        widget: markdown
+
+  - name: testimonios
+    label: Testimonios
+    label_singular: Testimonio
+    folder: src/content/testimonios
+    create: true
+    extension: md
+    identifier_field: author
+    slug: '{{slug}}'
+    sortable_fields: [author]
+    summary: '{{author}} — {{role}}'
+    editor:
+      preview: false
+    fields:
+      - label: Autor
+        name: author
+        widget: string
+      - label: Rol
+        name: role
+        widget: string
+      - label: Cita
+        name: quote
+        widget: text
