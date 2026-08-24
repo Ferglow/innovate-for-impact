@@ -3,6 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import EventCard from '../components/EventCard.astro';
 import TestimonialCard from '../components/TestimonialCard.astro';
+import { getCollection } from 'astro:content';
+
+const events = await getCollection('eventos');
+const sorted = [...events].sort((a, b) => a.data.order - b.data.order);
+const upcoming = sorted.filter((e) => e.data.status !== 'past');
+const past = sorted.filter((e) => e.data.status === 'past');
 
 const stats = [
 	{ value: '2,200+', label: 'registros' },
@@ -23,44 +29,6 @@ const attendees = [
 	'HSBC',
 	'Sephora',
 	'JetBlue',
-];
-
-const upcomingEvents = [
-	{
-		city: 'New York',
-		country: 'US · Septiembre 2025',
-		date: 'Climate Week NYC',
-		status: 'next' as const,
-		href: '#',
-		stats: [
-			{ value: '25', label: 'speakers' },
-			{ value: '05', label: 'paneles' },
-			{ value: '01', label: 'soundbath' },
-		],
-	},
-	{
-		city: 'Mexico City',
-		country: 'MX · Octubre 2025',
-		date: 'Por anunciar',
-		status: 'soon' as const,
-	},
-];
-
-const pastEvents = [
-	{
-		city: 'Singapore',
-		country: 'SG · Mayo 2025',
-		date: 'A concert with purpose',
-		status: 'past' as const,
-		href: '#',
-	},
-	{
-		city: 'New York',
-		country: 'US · Septiembre 2024',
-		date: 'Innovate for Impact NYC',
-		status: 'past' as const,
-		href: '#',
-	},
 ];
 
 const experiences = [
@@ -152,7 +120,11 @@ const testimonial = {
 		<div class="container">
 			<SectionHeader eyebrow="Agenda 2025" title="Próximos eventos insignia" />
 			<div class="card-grid">
-				{upcomingEvents.map((event) => <EventCard {...event} />)}
+				{
+					upcoming.map((event) => (
+						<EventCard {...event.data} href={`/eventos/${event.id}/`} />
+					))
+				}
 			</div>
 		</div>
 	</section>
@@ -188,7 +160,9 @@ const testimonial = {
 				description="De cenas exclusivas a actividades colaborativas: cada edición deja una comunidad más fuerte de personas impulsando el cambio."
 			/>
 			<div class="card-grid two">
-				{pastEvents.map((event) => <EventCard {...event} />)}
+				{
+					past.map((event) => <EventCard {...event.data} href={`/eventos/${event.id}/`} />)
+				}
 			</div>
 		</div>
 	</section>
