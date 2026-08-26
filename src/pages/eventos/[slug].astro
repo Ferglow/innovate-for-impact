@@ -21,6 +21,16 @@ const statusLabels = {
 ---
 
 <BaseLayout title={`${event.data.city} | Innovate for Impact`} description={event.data.kicker}>
+	<script type="application/ld+json" set:html={JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Event',
+		name: `${event.data.city} - Innovate for Impact`,
+		description: event.data.kicker,
+		eventStatus: event.data.status === 'past' ? 'https://schema.org/EventScheduled' : event.data.status === 'soon' ? 'https://schema.org/EventScheduled' : 'https://schema.org/EventScheduled',
+		eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+		location: { '@type': 'Place', name: event.data.city, address: event.data.country },
+		organizer: { '@type': 'Organization', name: 'Innovate for Impact', url: 'https://innovate-for-impact-ferglow.netlify.app' },
+	})} />
 	<article>
 		<header class="hero">
 			<div class="container">

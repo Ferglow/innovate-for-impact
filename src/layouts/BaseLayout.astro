@@ -1,25 +1,35 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
 
 interface Props {
 	title: string;
 	description?: string;
+	image?: string;
+	canonical?: string;
+	type?: string;
+	locale?: string;
 }
 
-const { title, description = 'Iniciativa global donde la innovacion se encuentra con el impacto.' } =
-	Astro.props;
+const {
+	title,
+	description = 'Iniciativa global donde la innovacion se encuentra con el impacto.',
+	image,
+	canonical,
+	type,
+	locale = 'es',
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={locale}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={description} />
-		<title>{title}</title>
+		<SEO {title} {description} {image} {canonical} {type} {locale} />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link

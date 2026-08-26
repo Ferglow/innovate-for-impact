@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Registro | Innovate for Impact" description="Únete a la comunidad de Innovate for Impact. Regístrate para recibir información sobre próximos eventos y oportunidades de participación.">
+	<section class="form-hero">
+		<div class="container">
+			<a href="/" class="back">← Volver al inicio</a>
+			<h1>Únete a la comunidad</h1>
+			<p class="lede">
+				Regístrate para recibir información exclusiva sobre próximos eventos, convocatorias de
+				speakers y oportunidades de patrocinio.
+			</p>
+		</div>
+	</section>
+
+	<section class="form-section">
+		<div class="container">
+			<form
+				name="registro"
+				method="POST"
+				data-netlify="true"
+				data-netlify-honeypot="bot-field"
+				action="/gracias"
+				class="form"
+			>
+				<input type="hidden" name="form-name" value="registro" />
+				<p class="hidden" style="display: none">
+					<label>No llenar: <input name="bot-field" /></label>
+				</p>
+
+				<div class="field">
+					<label for="nombre">Nombre completo *</label>
+					<input type="text" id="nombre" name="nombre" required placeholder="Tu nombre" />
+				</div>
+
+				<div class="field">
+					<label for="email">Email *</label>
+					<input type="email" id="email" name="email" required placeholder="tu@email.com" />
+				</div>
+
+				<div class="field">
+					<label for="empresa">Empresa / Organización</label>
+					<input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa" />
+				</div>
+
+				<div class="field">
+					<label for="rol">¿Cómo te gustaría participar? *</label>
+					<select id="rol" name="rol" required>
+						<option value="" disabled selected>Selecciona una opción</option>
+						<option value="attendee">Asistente</option>
+						<option value="speaker">Speaker / Panelista</option>
+						<option value="sponsor">Patrocinador</option>
+						<option value="volunteer">Voluntario</option>
+					</select>
+				</div>
+
+				<div class="field">
+					<label for="mensaje">¿Algo más que quieras contarnos?</label>
+					<textarea id="mensaje" name="mensaje" rows="4" placeholder="Cuéntanos sobre tu interés en IFI..."></textarea>
+				</div>
+
+				<button type="submit" class="submit-btn">Enviar registro</button>
+			</form>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.form-hero {
+		background: var(--color-forest);
+		color: var(--color-cream);
+		padding-block: 5rem 3.5rem;
+	}
+
+	.back {
+		display: inline-block;
+		font-size: 0.9rem;
+		opacity: 0.7;
+		margin-bottom: 2rem;
+		transition: opacity 0.2s ease;
+	}
+
+	.back:hover {
+		opacity: 1;
+	}
+
+	h1 {
+		font-size: clamp(2.2rem, 5vw, 3.5rem);
+		margin-bottom: 1rem;
+	}
+
+	.lede {
+		max-width: 52ch;
+		opacity: 0.8;
+		font-size: 1.1rem;
+	}
+
+	.form-section {
+		padding-block: 4rem;
+	}
+
+	.form {
+		max-width: 40rem;
+		margin-inline: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 1.75rem;
+	}
+
+	.field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	label {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--color-forest);
+	}
+
+	input,
+	select,
+	textarea {
+		font-family: var(--font-body);
+		font-size: 1rem;
+		padding: 0.85rem 1rem;
+		border: 1px solid color-mix(in srgb, var(--color-ink) 25%, transparent);
+		border-radius: 0.75rem;
+		background: #fff;
+		color: var(--color-ink);
+		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	input:focus,
+	select:focus,
+	textarea:focus {
+		outline: none;
+		border-color: var(--color-moss);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-moss) 15%, transparent);
+	}
+
+	textarea {
+		resize: vertical;
+	}
+
+	.submit-btn {
+		font-family: var(--font-body);
+		font-size: 1rem;
+		font-weight: 600;
+		padding: 1rem 2rem;
+		border: none;
+		border-radius: 999px;
+		background-color: var(--color-forest);
+		color: var(--color-lime);
+		cursor: pointer;
+		transition: transform 0.2s ease, background-color 0.2s ease;
+		align-self: flex-start;
+	}
+
+	.submit-btn:hover {
+		transform: translateY(-2px);
+		background-color: var(--color-moss);
+	}
+</style>

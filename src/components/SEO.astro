@@ -1,0 +1,40 @@
+---
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+	canonical?: string;
+	type?: string;
+	locale?: string;
+}
+
+const {
+	title,
+	description,
+	image = '/og-default.jpg',
+	canonical = Astro.url.href,
+	type = 'website',
+	locale = 'es',
+} = Astro.props;
+
+const siteName = 'Innovate for Impact';
+---
+
+<meta name="description" content={description} />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={locale} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+<title>{title}</title>

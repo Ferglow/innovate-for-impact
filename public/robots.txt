@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://innovate-for-impact-ferglow.netlify.app/sitemap-index.xml
