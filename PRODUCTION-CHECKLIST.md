@@ -51,24 +51,21 @@ El sitio está desplegado y funcional en:
 
 ### 2. Actualizar URLs canónicas y sitemap
 
-Después de configurar el dominio, actualiza:
+Ejecuta el script automático:
 
-**`astro.config.mjs`** — cambia `site`:
-```js
-site: 'https://innovateforimpact.io',
+```bash
+./scripts/switch-domain.sh innovateforimpact.io
 ```
 
-**`public/robots.txt`** — cambia la línea Sitemap:
-```
-Sitemap: https://innovateforimpact.io/sitemap-index.xml
-```
+Esto actualiza los3 archivos de golpe:
+- `src/config.ts` → URL canónica
+- `public/robots.txt` → Sitemap URL
+- `public/admin/config.yml` → Decap CMS site_url
 
-**`public/admin/config.yml`** — cambia `site_url`:
-```yaml
-site_url: https://innovateforimpact.io
+Luego haz push:
+```bash
+git add -A && git commit -m "feat: dominio innovateforimpact.io" && git push
 ```
-
-Estos cambios actualizan canonical URLs, sitemap XML y la config de Decap. Haz push y el deploy automático los refleja.
 
 ### 3. Verificar formulario de registro
 
@@ -124,7 +121,10 @@ innovate-for-impact/
 │   ├── og-default.jpg          ← imagen para redes sociales
 │   ├── robots.txt              ← reglas de indexación
 │   └── favicon.svg
+├── scripts/
+│   └── switch-domain.sh        ← cambia dominio en 1 comando
 ├── src/
+│   ├── config.ts               ← URL del sitio (fuente única de verdad)
 │   ├── components/
 │   │   ├── SEO.astro           ← meta tags reutilizable
 │   │   ├── Header.astro        ← nav sticky + toggle idioma
