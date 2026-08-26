@@ -1,4 +1,6 @@
 ---
+import LanguageToggle from './LanguageToggle.astro';
+
 const navLinks = [
 	{ href: '#eventos', label: 'Eventos' },
 	{ href: '#comunidad', label: 'Comunidad' },
@@ -20,6 +22,7 @@ const navLinks = [
 			{navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
 		</nav>
 
+		<LanguageToggle />
 		<a href="#registro" class="cta">Únete</a>
 	</div>
 </header>

@@ -1,21 +1,21 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import EventCard from '../components/EventCard.astro';
-import TestimonialCard from '../components/TestimonialCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import EventCard from '../../components/EventCard.astro';
+import TestimonialCard from '../../components/TestimonialCard.astro';
 import { getCollection } from 'astro:content';
 
-const events = await getCollection('eventos', ({ data }) => data.lang === 'es');
+const events = await getCollection('eventos', ({ data }) => data.lang === 'en');
 const sorted = [...events].sort((a, b) => a.data.order - b.data.order);
 const upcoming = sorted.filter((e) => e.data.status !== 'past');
 const past = sorted.filter((e) => e.data.status === 'past');
-const testimonials = await getCollection('testimonios', ({ data }) => data.lang === 'es');
+const testimonials = await getCollection('testimonios', ({ data }) => data.lang === 'en');
 
 const stats = [
-	{ value: '2,200+', label: 'registros' },
+	{ value: '2,200+', label: 'registrations' },
 	{ value: '50', label: 'speakers' },
-	{ value: '11', label: 'paneles' },
-	{ value: '7', label: 'alianzas estratégicas' },
+	{ value: '11', label: 'panels' },
+	{ value: '7', label: 'strategic partnerships' },
 ];
 
 const attendees = [
@@ -34,18 +34,18 @@ const attendees = [
 
 const experiences = [
 	{
-		title: 'Conciertos con propósito',
-		description: 'Música en vivo que conecta mentes y corazones con la causa.',
+		title: 'Concerts with purpose',
+		description: 'Live music that connects minds and hearts with the cause.',
 		variant: 'concert',
 	},
 	{
-		title: 'Sound bath inmersivo',
-		description: 'Experiencias sensoriales para integrar las ideas del escenario.',
+		title: 'Immersive soundbath',
+		description: 'Sensory experiences to absorb the ideas from the stage.',
 		variant: 'soundbath',
 	},
 	{
-		title: 'Conexiones estratégicas',
-		description: 'Espacios de networking donde nacen alianzas reales.',
+		title: 'Strategic connections',
+		description: 'Networking spaces where real partnerships are born.',
 		variant: 'networking',
 	},
 ];
@@ -53,20 +53,21 @@ const experiences = [
 const sponsors = ['Asuaire', 'Algoryt', 'Connecto', 'T+C', 'Overview Effect'];
 ---
 
-<BaseLayout title="Innovate for Impact | Donde la innovación se encuentra con el impacto">
+<BaseLayout title="Innovate for Impact | Where innovation meets impact">
 	<section class="hero">
 		<div class="container hero-inner">
-			<p class="eyebrow">Climate Week · Nueva York · Septiembre 2025</p>
+			<p class="eyebrow">Climate Week · New York · September 2025</p>
 			<h1>
-				Donde la <em>innovación</em> se encuentra con el <em>impacto</em>
+				Where <em>innovation</em> meets <em>impact</em>
 			</h1>
 			<p class="lede">
-				Innovate for Impact es una iniciativa global que reúne a líderes, empresas y changemakers
-				mediante conversaciones significativas, experiencias inmersivas y alianzas estratégicas.
+				Innovate for Impact is a global initiative that brings together leaders, companies and
+				changemakers through meaningful conversations, immersive experiences and strategic
+				partnerships.
 			</p>
 			<div class="actions">
-				<a href="#eventos" class="btn primary">Ver próximos eventos</a>
-				<a href="#comunidad" class="btn ghost">Únete a la comunidad</a>
+				<a href="/en#eventos" class="btn primary">View upcoming events</a>
+				<a href="/en#comunidad" class="btn ghost">Join the community</a>
 			</div>
 
 			<dl class="stats">
@@ -82,8 +83,8 @@ const sponsors = ['Asuaire', 'Algoryt', 'Connecto', 'T+C', 'Overview Effect'];
 		</div>
 	</section>
 
-	<section class="attendees" aria-label="Algunos de nuestros asistentes">
-		<p class="container marquee-title">Algunos de nuestros asistentes</p>
+	<section class="attendees" aria-label="Some of our attendees">
+		<p class="container marquee-title">Some of our attendees</p>
 		<div class="marquee">
 			<div class="marquee-track">
 				{
@@ -98,25 +99,25 @@ const sponsors = ['Asuaire', 'Algoryt', 'Connecto', 'T+C', 'Overview Effect'];
 	<section id="nosotros" class="about">
 		<div class="container">
 			<SectionHeader
-				eyebrow="¿Qué es IFI?"
-				title="Una plataforma global donde la sostenibilidad inspira acción real"
+				eyebrow="What is IFI?"
+				title="A global platform where sustainability drives real action"
 			/>
 			<p class="about-text">
-				Lanzada durante la <strong>Climate Week en Nueva York</strong> y expandida a Singapur,
-				IFI une a líderes, empresas y changemakers a través de conversaciones significativas. En
-				solo tres ediciones ha consolidado un espacio donde la innovación impulsa el cambio, con
-				un enfoque local para los desafíos globales de cada ciudad anfitriona.
+				Launched during <strong>Climate Week in New York</strong> and later expanded to
+				Singapore, IFI unites leaders, companies and changemakers through meaningful
+				conversations. In just three editions it has created a powerful platform where innovation
+				inspires real change, with a local approach to global sustainability challenges.
 			</p>
 		</div>
 	</section>
 
 	<section id="eventos" class="events">
 		<div class="container">
-			<SectionHeader eyebrow="Agenda 2025" title="Próximos eventos insignia" />
+			<SectionHeader eyebrow="2025 Agenda" title="Upcoming flagship events" />
 			<div class="card-grid">
 				{
 					upcoming.map((event) => (
-						<EventCard {...event.data} href={`/eventos/${event.id.split('/')[1]}/`} />
+						<EventCard {...event.data} href={`/en/events/${event.id.split('/')[1]}/`} />
 					))
 				}
 			</div>
@@ -127,8 +128,8 @@ const sponsors = ['Asuaire', 'Algoryt', 'Connecto', 'T+C', 'Overview Effect'];
 		<div class="container">
 			<SectionHeader
 				eyebrow="Beyond talks"
-				title="Ideas, música y experiencias inolvidables"
-				description="Nuestros eventos combinan charlas inspiradoras con conciertos únicos, donde innovación, naturaleza y música se encuentran."
+				title="Ideas, music and unforgettable experiences"
+				description="Our events blend inspiring talks with unique concerts, where innovation, nature and music come together."
 			/>
 			<div class="experience-grid">
 				{
@@ -149,27 +150,29 @@ const sponsors = ['Asuaire', 'Algoryt', 'Connecto', 'T+C', 'Overview Effect'];
 	<section id="comunidad" class="community">
 		<div class="container">
 			<SectionHeader
-				eyebrow="Comunidad"
-				title="Eventos pasados"
-				description="De cenas exclusivas a actividades colaborativas: cada edición deja una comunidad más fuerte de personas impulsando el cambio."
+				eyebrow="Community"
+				title="Past events"
+				description="From exclusive dinners to collaborative activities: each edition leaves a stronger community of changemakers."
 			/>
 			<div class="card-grid two">
 				{
-					past.map((event) => <EventCard {...event.data} href={`/eventos/${event.id}/`} />)
+					past.map((event) => (
+						<EventCard {...event.data} href={`/en/events/${event.id.split('/')[1]}/`} />
+					))
 				}
 			</div>
 		</div>
 	</section>
 
 	<section class="testimonials">
-			<div class="container">
-				{testimonials.map((entry) => <TestimonialCard {...entry.data} />)}
-			</div>
-		</section>
+		<div class="container">
+			{testimonials.map((entry) => <TestimonialCard {...entry.data} />)}
+		</div>
+	</section>
 
 	<section id="sponsors" class="sponsors">
 		<div class="container">
-			<SectionHeader eyebrow="Aliados" title="Algunos de nuestros patrocinadores" />
+			<SectionHeader eyebrow="Partners" title="Some of our sponsors" />
 			<ul class="sponsor-list">
 				{sponsors.map((name) => (
 					<li>{name}</li>

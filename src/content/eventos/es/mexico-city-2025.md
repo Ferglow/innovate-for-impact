@@ -1,7 +1,8 @@
 ---
 city: Mexico City
 country: México
-date: Noviembre 2028
+date: Octubre 2029
+lang: es
 status: soon
 order: 2
 ---

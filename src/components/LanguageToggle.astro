@@ -1,0 +1,32 @@
+---
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath.startsWith('/en');
+const target = isEnglish ? currentPath.replace('/en', '') || '/' : `/en${currentPath}`;
+const label = isEnglish ? 'ES' : 'EN';
+---
+
+<a href={target} class="lang-toggle" title={isEnglish ? 'Cambiar a español' : 'Switch to English'}>
+	{label}
+</a>
+
+<style>
+	.lang-toggle {
+		font-size: 0.82rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		border: 1px solid color-mix(in srgb, var(--color-ink) 25%, transparent);
+		border-radius: 999px;
+		padding: 0.35rem 0.75rem;
+		opacity: 0.8;
+		transition:
+			opacity 0.2s ease,
+			border-color 0.2s ease,
+			color 0.2s ease;
+	}
+
+	.lang-toggle:hover {
+		opacity: 1;
+		border-color: var(--color-forest);
+		color: var(--color-moss);
+	}
+</style>

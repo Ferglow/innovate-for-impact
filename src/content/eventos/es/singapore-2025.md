@@ -3,6 +3,7 @@ city: Singapore
 country: Singapur
 date: Mayo 2025
 kicker: A concert with purpose
+lang: es
 status: past
 order: 1
 ---

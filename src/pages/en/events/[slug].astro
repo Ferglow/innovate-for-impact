@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-	const events = await getCollection('eventos', ({ data }) => data.lang === 'es');
+	const events = await getCollection('eventos', ({ data }) => data.lang === 'en');
 	return events.map((event) => ({
 		params: { slug: event.id.split('/')[1] },
 		props: { event },
@@ -14,9 +14,9 @@ const { event } = Astro.props;
 const { Content } = await render(event);
 
 const statusLabels = {
-	next: 'Evento reciente',
+	next: 'Recent event',
 	soon: 'Coming soon',
-	past: 'Evento pasado',
+	past: 'Past event',
 } as const;
 ---
 
@@ -24,7 +24,7 @@ const statusLabels = {
 	<article>
 		<header class="hero">
 			<div class="container">
-				<a href="/#eventos" class="back">← Volver a eventos</a>
+				<a href="/en" class="back">← Back to events</a>
 				<p class="badge">{statusLabels[event.data.status]}</p>
 				{event.data.kicker && <p class="kicker">{event.data.kicker}</p>}
 				<h1>{event.data.city}</h1>

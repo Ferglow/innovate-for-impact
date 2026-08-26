@@ -3,6 +3,7 @@ city: New York
 country: Estados Unidos
 date: Septiembre 2025
 kicker: Climate Week NYC
+lang: es
 status: next
 order: 1
 stats:

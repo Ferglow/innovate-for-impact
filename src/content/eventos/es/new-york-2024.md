@@ -3,6 +3,7 @@ city: New York
 country: Estados Unidos
 date: Septiembre 2024
 kicker: Primera edición
+lang: es
 status: past
 order: 2
 ---

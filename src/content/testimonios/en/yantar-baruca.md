@@ -1,6 +1,7 @@
 ---
 author: Yantar Baruca
 role: Sustainability Enthusiast
+lang: en
 quote: >-
   Attending the NYC Climate Week event was a transformative experience. The blend of powerful
   talks, innovative ideas, and the incredible concert created a unique atmosphere. I left feeling
